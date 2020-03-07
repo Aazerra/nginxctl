@@ -25,7 +25,6 @@ class App(click.MultiCommand):
                 eval(code, ns, ns)
             return ns['execute']
         except Exception as e:
-            print(e)
             return
 
 
