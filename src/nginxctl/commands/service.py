@@ -8,30 +8,30 @@ def execute():
 
 
 @execute.command("restart")
-def create():
+def restart():
     os.system("systemctl restart nginx")
     click.echo("Restarting...")
 
 
 @execute.command("stop")
-def create():
+def stop():
     os.system("systemctl stop nginx")
     click.echo("Stoping...")
 
 
 @execute.command("start")
-def create():
+def start():
     os.system("systemctl start nginx")
     click.echo("Starting...")
 
 
 @execute.command("enable")
-def create():
+def enable():
     os.system("systemctl enable nginx")
     click.echo("Enabling...")
 
 
 @execute.command("disable")
-def create():
+def disable():
     os.system("systemctl disable nginx")
     click.echo("Disabling...")
