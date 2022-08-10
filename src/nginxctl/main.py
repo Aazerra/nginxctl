@@ -28,7 +28,6 @@ class App(click.MultiCommand):
             return
 
 
-
 def run():
     cli = App(help='A tool for config and handle nginx')
     cli()
