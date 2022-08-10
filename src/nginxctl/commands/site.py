@@ -1,8 +1,8 @@
 import click
 import os
 
-config_path = "/etc/nginx/sites-available"
-enabled_path = "/etc/nginx/sites-enabled"
+config_path = os.getenv("NGINX_CONFIG_PATH") or "/etc/nginx/sites-available"
+enabled_path = os.getenv("NGINX_ENABLED_PATH") or "/etc/nginx/sites-enabled"
 
 
 @click.group()
@@ -15,12 +15,13 @@ def execute():
 def enconf(name):
     file_path = os.path.join(config_path, name)
     dist_path = os.path.join(enabled_path, name)
+
     if not os.path.exists(file_path):
-        return click.echo("-> Config File NotFound")
+        return click.echo(f"[#] {name} file notfound")
     if os.path.exists(dist_path):
-        return click.echo("-> Config Already Enabled")
+        return click.echo(f"[x] {name} already enabled")
     os.link(file_path, dist_path)
-    return click.echo(f"-> Config {name} Has Been Enabled")
+    return click.echo(f"[.] {name} has been enabled")
 
 
 @execute.command("-")
@@ -28,6 +29,6 @@ def enconf(name):
 def disconf(name):
     file_path = os.path.join(enabled_path, name)
     if not os.path.exists(file_path):
-        return click.echo("-> Config Already Disabled Or Not Found")
+        return click.echo(f"[#] {name} is already disabled or notfound")
     os.unlink(file_path)
-    return click.echo(f"-> Config {name} Has Been Disabled")
+    return click.echo(f"[.] {name} has been disabled")

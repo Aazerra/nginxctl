@@ -28,7 +28,7 @@ class App(click.MultiCommand):
             return
 
 
-cli = App(help='A tool for config and handle nginx')
 
-if __name__ == '__main__':
+def run():
+    cli = App(help='A tool for config and handle nginx')
     cli()
